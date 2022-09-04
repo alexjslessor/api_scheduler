@@ -13,7 +13,7 @@ settings = get_settings()
 async def pol_task():
     while True:
         await get_pol()
-        await asyncio.sleep(14.9)
+        await asyncio.sleep(180)
 
 def create_app() -> FastAPI:
     app = FastAPI(

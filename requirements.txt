@@ -18,6 +18,8 @@ redis==3.5.3
 flower==1.0.0
 requests==2.22.0
 
+# motor
+
 osint-tools
 
 # matplotlib
