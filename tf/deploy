@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source ../env
+test_env
+
+terraform validate
+terraform plan -var "do_token=${DO_PAT}"
+
+# terraform plan -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}"
+# terraform apply -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}"
+
+terraform apply -var "do_token=${DO_PAT}"
+
+# terraform apply -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}" -var "private_key=${DO_PRIVATE_KEY}"
+
+# terraform show | grep "ipv4"
+
+# nslookup -type=a your_domain | grep "Address" | tail -1
+
+# terraform destroy -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}"
+
+
+# scp -i ./MyKeyPair.pem default ubuntu@18.117.217.121:/etc/nginx/sites-enabled/default
+
