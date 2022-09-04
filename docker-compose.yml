@@ -1,0 +1,117 @@
+version: '3.7'
+services:
+  redis:
+    # image: redis:6-alpine
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.api.docker
+    # image: fastapi_celery_example_web
+    volumes:
+      - .:/app
+    ports:
+      - 5000:5000
+    env_file:
+      - .env/.base
+    depends_on:
+      # - db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com
+      - redis
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.api.docker
+    image: api-scheduler_api:latest
+    command: celery -A main.celery worker --loglevel=info
+    volumes:
+      - .:/app
+    env_file:
+      - .env/.base
+    depends_on:
+      # - db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com
+      - redis
+      - api
+
+  celery_beat:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.api.docker
+    image: api-scheduler_api:latest
+    # command: rm -f './celerybeat.pid' && celery -A main.celery beat -l info
+    command: celery -A main.celery beat -l info
+    volumes:
+      - .:/app
+    env_file:
+      - .env/.base
+    depends_on:
+      # - db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com
+      - redis
+      - api
+      - celery_worker
+
+
+  # pg-db-1-do-user-4185874-0.b.db.ondigitalocean.com:
+  #   image: postgres:10
+  #   ports:
+  #     - 25060:5432
+  #   environment:
+  #     - POSTGRES_PORT=25060
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_PASSWORD=ulq1vdxnh3ave8rh
+  #     - POSTGRES_USER=nonadmin
+
+  # db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com:
+  #   image: redis:latest
+  #   container_name: redis
+  #   ports:
+  #     - 25061:25061
+  
+  # celery_worker:
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/Dockerfile
+  #   image: fastapi_celery_example_celery_worker
+  #   command: /start-celeryworker
+  #   volumes:
+  #     - .:/app
+  #   env_file:
+  #     - .env/.dev-sample
+  #   depends_on:
+  #     - redis
+  #     # - db
+
+  # celery_beat:
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/Dockerfile
+  #   image: fastapi_celery_example_celery_beat
+  #   command: /start-celerybeat
+  #   volumes:
+  #     - .:/app
+  #   env_file:
+  #     - .env/.dev-sample
+  #   depends_on:
+  #     - redis
+  #     # - db
+
+  # flower:
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/Dockerfile
+  #   image: fastapi_celery_example_celery_flower
+  #   command: /start-flower
+  #   volumes:
+  #     - .:/app
+  #   env_file:
+  #     - .env/.dev-sample
+  #   ports:
+  #     - 5557:5555
+  #   depends_on:
+  #     - redis
+  #     # - db
+

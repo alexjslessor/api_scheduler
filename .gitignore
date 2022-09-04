@@ -1,0 +1,7 @@
+__pycache__
+.pytest_cache
+.env
+celerybeat-schedule
+celerybeat.pid
+.terraform
+app.py
