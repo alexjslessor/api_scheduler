@@ -10,25 +10,21 @@ from .settings import get_settings
 
 settings = get_settings()
 
-
-
-async def timed_checker():
+async def pol_task():
     while True:
         await get_pol()
-        await asyncio.sleep(5)
+        await asyncio.sleep(14.9)
 
 def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.TITLE
     )
     app.celery_app = create_celery()
-    app.include_router(read_routes.router)
+    # app.include_router(read_routes.router)
 
     @app.on_event("startup")
     def startup_function():
-        # app.state.shared_object = MySharedObject()
-        asyncio.create_task(timed_checker())
-        # asyncio.create_task(timed_checker(app.state.shared_object))
+        asyncio.create_task(pol_task())
 
 
     # @app.on_event("startup")

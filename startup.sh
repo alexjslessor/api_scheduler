@@ -1,5 +1,9 @@
 #!/bin/bash
 
+source ./env && test_env
+uvicorn main:app --reload --port $PORT
+
+
 run_tests() {
     py.test -s tests/test_one.py
     # py.test -s tests/test_two.py

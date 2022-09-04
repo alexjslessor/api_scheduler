@@ -6,9 +6,18 @@ terraform {
     }
   }
 }
+
+# https://docs.digitalocean.com/reference/terraform/reference/resources/app/
+
 variable "do_token" {}
 # variable "domain_name" {}
 # variable "private_key" {}
+variable "mongo_uri" {
+  type = string
+  description = "mongodb connection string"
+}
+
+
 provider "digitalocean" {
   token = var.do_token
 }
@@ -28,8 +37,37 @@ resource "digitalocean_app" "api_scheduler" {
         repo           = "alexjslessor/api_scheduler"
       }
 
+    # envs = [
+    #   {
+    #     key = "MONGO_URI"
+    #     value = var.mongo_uri
+    #   },
+    #   {
+    #     key = "MONGO_DB_NAME"
+    #     value = "course"
+    #   },
+    #   {
+    #     key = "PORT"
+    #     value = "5000"
+    #   }
+    # ]
 
     }
+
+    # envs = [
+    #   {
+    #     key = "MONGO_URI"
+    #     value = var.mongo_uri
+    #   },
+    #   {
+    #     key = "MONGO_DB_NAME"
+    #     value = "course"
+    #   },
+    #   {
+    #     key = "PORT"
+    #     value = "5000"
+    #   }
+    # ]
   }
 }
 

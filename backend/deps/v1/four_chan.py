@@ -2,18 +2,45 @@ from ..base_deps import *
 import asyncio
 import json
 import httpx
-from osint_tools import get_catalog, Board
+from osint_tools.api import get_catalog, Board
 from pprint import pprint
+from ...con_db import mon_db, db
+
+from pymongo import ReplaceOne
 
 
 async def get_pol():
-    # time.sleep(45)
-    data = get_catalog(Board.b)
-    assert data is not None
-    assert len(data) > 0
-    pprint(data[:1])
+    data = get_catalog(Board.pol)
+    update = []
+    for catalog_model in data:
+        update.append(ReplaceOne(
+            {'no': catalog_model.no}, catalog_model.dict(), upsert=True)
+        )
+
+    idx = await mon_db.create_unique_idx(db['4chan'], 'no')
+    assert idx is not None
+    print(idx)
+
+    result = await db['4chan'].bulk_write(update)
+
+    assert result is not None
+    assert result.bulk_api_result['nModified'] > 0
+    assert result.bulk_api_result['writeErrors'] == []
+    assert result.bulk_api_result['writeConcernErrors'] == []
+    print('nModified: ', result.bulk_api_result['nModified'])
+    print('nUpserted: ', result.bulk_api_result['nUpserted'])
+    print('nInserted: ', result.bulk_api_result['nInserted'])
+    print('nRemoved: ', result.bulk_api_result['nRemoved'])
+    print('nMatched: ', result.bulk_api_result['nMatched'])
+    print('upserted: ', result.bulk_api_result['upserted'])
 
 
+# async def get_pol():
+#     # time.sleep(45)
+#     data = get_catalog(Board.b)
+#     assert data is not None
+#     assert len(data) > 0
+#     pprint(data[:1])
 
 
 

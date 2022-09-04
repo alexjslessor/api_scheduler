@@ -1,15 +1,22 @@
 #!/bin/bash
 
-source ../env
-test_env
+# source ../env
+# test_env
 
 terraform validate
 
 deploy_app() {
-    terraform plan -var "do_token=${DO_PAT}"
-    # terraform apply -var "do_token=${DO_PAT}"
-    # terraform destroy -var "do_token=${DO_PAT}"
+    terraform plan \
+        -var "do_token=${DO_PAT}" \
+        -var "mongo_uri=${MONGO_URI}"
+    terraform apply \
+        -var "do_token=${DO_PAT}" \
+        -var "mongo_uri=${MONGO_URI}"
+    # terraform destroy \
+        # -var "do_token=${DO_PAT}" \
+        # -var "mongo_uri=${MONGO_URI}"
 }
+deploy_app
 
 # terraform plan -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}"
 # terraform apply -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}"

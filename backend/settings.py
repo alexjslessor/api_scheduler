@@ -7,9 +7,9 @@ import ssl
 
 class _BaseSettings(BaseSettings):
     TITLE: str = 'Schedule API'
-    DOCS_URL: str = '/docs'
-    OPENAPI_URL: str = '/openapi'
-    REDOC_URL: str = '/redoc'
+    # DOCS_URL: str = '/docs'
+    # OPENAPI_URL: str = '/openapi'
+    # REDOC_URL: str = '/redoc'
 
     # V1_PREFIX = '/'
     # TAGS: List[str] = ['']
@@ -18,8 +18,18 @@ class _BaseSettings(BaseSettings):
     # CORS_ALLOW_HEADERS: List[str] = ['*']
     # CORS_ORIGINS: List[str] = ['*']
     # PORT: int = environ.get('PORT')
-    # MONGO_URI_DEV: str = environ.get('MONGO_URI_DEV')
-    # MONGO_DB_NAME: str = 'database'
+    APP_NAME: str = environ.get("APP_NAME")
+    APP_VERSION: str = environ.get("APP_VERSION")
+    ENV_NAME: str = environ.get("ENV_NAME")
+
+    INPUT_BUCKET: str = environ.get('INPUT_BUCKET')
+    BUCKET_NAME: str = f'{APP_NAME}-{APP_VERSION}-{ENV_NAME}-{INPUT_BUCKET}'
+
+    AWS_REGION: str = environ.get('AWS_REGION')
+    MONGO_URI: str = environ.get('MONGO_URI')
+    MONGO_DB_NAME: str = environ.get('MONGO_DB_NAME')
+
+
     # https://docs.celeryq.dev/en/stable/userguide/configuration.html#id11
     BROKER_USE_SSL = {
         'cert_reqs': ssl.CERT_NONE
