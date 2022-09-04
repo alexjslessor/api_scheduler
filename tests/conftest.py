@@ -1,5 +1,5 @@
 from asgi_lifespan import LifespanManager
-from starlette.status import HTTP_200_OK
+# from starlette.status import HTTP_200_OK
 from httpx import AsyncClient
 from pprint import pprint
 import pytest_asyncio
@@ -8,6 +8,10 @@ import asyncio
 
 from backend.entry import create_app
 from backend.deps import *
+from backend.settings import get_settings
+
+settings = get_settings()
+
 
 
 # app = create_app()

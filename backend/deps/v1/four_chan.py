@@ -1,18 +1,17 @@
 from ..base_deps import *
 import asyncio
 import json
-import requests
 import httpx
-# from fastapi.encoders import jsonable_encoder
+from osint_tools import get_catalog, Board
+from pprint import pprint
 
-def get_catalog():
-    url = 'https://a.4cdn.org/pol/catalog.json'
-    data = requests.get(url).json()
-    all_posts = []
-    for page in data:
-        for thread in page['threads']:
-            all_posts.append(CatalogThread(**thread))
-    return all_posts
+
+async def get_pol():
+    # time.sleep(45)
+    data = get_catalog(Board.b)
+    assert data is not None
+    assert len(data) > 0
+    pprint(data[:1])
 
 
 

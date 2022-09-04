@@ -1,1 +1,1 @@
-from .schema.schema import *
+# from .schema.schema import *

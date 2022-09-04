@@ -1,15 +1,16 @@
 from functools import lru_cache
 from pydantic import BaseSettings
 from os import environ
-from typing import List
+# from typing import List
 # import os.path
 import ssl
 
 class _BaseSettings(BaseSettings):
-    # TITLE: str = 'Example App'
-    # DOCS_URL: str = '/docs'
-    # OPENAPI_URL: str = '/openapi'
-    # REDOC_URL: str = '/redoc'
+    TITLE: str = 'Schedule API'
+    DOCS_URL: str = '/docs'
+    OPENAPI_URL: str = '/openapi'
+    REDOC_URL: str = '/redoc'
+
     # V1_PREFIX = '/'
     # TAGS: List[str] = ['']
     # CORS_ALLOW_CREDENTIALS: bool = True

@@ -19,15 +19,9 @@ resource "digitalocean_app" "api_scheduler" {
     service {
       dockerfile_path = "Dockerfile"
       name               = "scheduler"
-      # environment_slug   = "fastapi"
       instance_count     = 1
       instance_size_slug = "basic-xxs"
       http_port = 5000
-
-      # git {
-      #   repo_clone_url = "https://github.com/digitalocean/sample-golang.git"
-      #   branch         = "main"
-      # }
       github {
         branch         = "master"
         deploy_on_push = true

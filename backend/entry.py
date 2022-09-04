@@ -1,17 +1,16 @@
 from fastapi import FastAPI
-from .routers.v1 import read_routes
-from .celery_utils import create_celery
-from osint_tools import get_catalog, Board
+from osint_tools.api import get_catalog, Board
 from pprint import pprint
 import asyncio
 
+from .deps import get_pol
+from .routers.v1 import read_routes
+from .celery_utils import create_celery
+from .settings import get_settings
 
-async def get_pol():
-    # time.sleep(45)
-    data = get_catalog(Board.b)
-    assert data is not None
-    assert len(data) > 0
-    pprint(data[:1])
+settings = get_settings()
+
+
 
 async def timed_checker():
     while True:
@@ -19,7 +18,9 @@ async def timed_checker():
         await asyncio.sleep(5)
 
 def create_app() -> FastAPI:
-    app = FastAPI()
+    app = FastAPI(
+        title=settings.TITLE
+    )
     app.celery_app = create_celery()
     app.include_router(read_routes.router)
 
