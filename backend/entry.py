@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from osint_tools.api import get_catalog, Board
+from osint_tools.logs import logger
 from pprint import pprint
 import asyncio
 
@@ -13,7 +14,9 @@ settings = get_settings()
 async def pol_task():
     while True:
         await get_pol()
-        await asyncio.sleep(180)
+        sleep_time = 69
+        logger.info(f'sleep time: {sleep_time}')
+        await asyncio.sleep(sleep_time)
 
 def create_app() -> FastAPI:
     app = FastAPI(

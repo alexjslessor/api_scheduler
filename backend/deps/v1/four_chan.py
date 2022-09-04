@@ -5,6 +5,7 @@ import httpx
 from osint_tools.api import get_catalog, Board
 # from pprint import pprint
 from pymongo import ReplaceOne
+from osint_tools.logs import logger
 
 from ...con_db import mon_db, db
 
@@ -27,12 +28,10 @@ async def get_pol():
     # assert result.bulk_api_result['nModified'] > 0
     # assert result.bulk_api_result['writeErrors'] == []
     # assert result.bulk_api_result['writeConcernErrors'] == []
-    print('nModified: ', result.bulk_api_result['nModified'])
-    print('nUpserted: ', result.bulk_api_result['nUpserted'])
-    print('nInserted: ', result.bulk_api_result['nInserted'])
-    # print('nRemoved: ', result.bulk_api_result['nRemoved'])
-    # print('nMatched: ', result.bulk_api_result['nMatched'])
-    # print('upserted: ', result.bulk_api_result['upserted'])
+    logger.info(f"nModified: {result.bulk_api_result['nModified']}")
+    logger.info(f"nUpserted: {result.bulk_api_result['nUpserted']}")
+    logger.info(f"nInserted: {result.bulk_api_result['nInserted']}")
+    logger.info(f"nMatched: {result.bulk_api_result['nMatched']}")
 
 
 # async def get_pol():
