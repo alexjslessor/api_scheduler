@@ -20,7 +20,7 @@ requests==2.22.0
 
 # motor
 
-# osint-tools
+osint-tools
 
 # matplotlib
 # pandas
