@@ -10,7 +10,7 @@ settings = get_settings()
 async def news_task():
     while True:
         await get_rss()
-        sleep_time = 130
+        sleep_time = 1130
         logger.info(f'news sleep time: {sleep_time}')
         await asyncio.sleep(sleep_time)
 
