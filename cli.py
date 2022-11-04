@@ -1,24 +1,29 @@
 import typer
-from rich import print as rprint
 from invoke import run
 
 set_env = 'source ./env && test_env'
 app = typer.Typer()
-
 
 @app.command()
 def terra_deploy():
     cmd = f'{set_env} && cd tf && ./deploy'
     result = run(cmd, hide=False, warn=True)
     if result.ok:
-        rprint(result.stdout)
+        print(result.stdout)
 
 @app.command()
 def startup():
     cmd = f'{set_env} && uvicorn main:app --reload --port $PORT'
     result = run(cmd, hide=False, warn=True)
     if result.ok:
-        rprint(result.stdout)
+        print(result.stdout)
+
+@app.command()
+def install_pkg():
+    cmd = f'{set_env} && pip install $LIBRARY_LOCAL --force-reinstall'
+    result = run(cmd, hide=False, warn=True)
+    if result.ok:
+        print(result.stdout)
 
 
 # @app.command()

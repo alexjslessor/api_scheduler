@@ -1,14 +1,4 @@
 from ..base_deps import *
-import asyncio
-import json
-import httpx
-from osint_tools.api import get_catalog, Board
-# from pprint import pprint
-from pymongo import ReplaceOne
-from osint_tools.logs import logger
-
-from ...con_db import mon_db, db
-
 
 async def get_pol():
     data = get_catalog(Board.pol)
@@ -19,28 +9,12 @@ async def get_pol():
         )
 
     idx = await mon_db.create_unique_idx(db['4chan'], 'no')
-    # assert idx is not None
-    # print(idx)
-
     result = await db['4chan'].bulk_write(update)
 
-    # assert result is not None
-    # assert result.bulk_api_result['nModified'] > 0
-    # assert result.bulk_api_result['writeErrors'] == []
-    # assert result.bulk_api_result['writeConcernErrors'] == []
     logger.info(f"nModified: {result.bulk_api_result['nModified']}")
     logger.info(f"nUpserted: {result.bulk_api_result['nUpserted']}")
     logger.info(f"nInserted: {result.bulk_api_result['nInserted']}")
     logger.info(f"nMatched: {result.bulk_api_result['nMatched']}")
-
-
-# async def get_pol():
-#     # time.sleep(45)
-#     data = get_catalog(Board.b)
-#     assert data is not None
-#     assert len(data) > 0
-#     pprint(data[:1])
-
 
 
 

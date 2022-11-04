@@ -1,15 +1,19 @@
 from fastapi import FastAPI
-from osint_tools.api import get_catalog, Board
 from osint_tools.logs import logger
-from pprint import pprint
 import asyncio
-
-from .deps import get_pol
-from .routers.v1 import read_routes
+from .deps import get_pol, get_rss
 from .celery_utils import create_celery
 from .settings import get_settings
 
 settings = get_settings()
+
+async def news_task():
+    while True:
+        await get_rss()
+        sleep_time = 10
+        logger.info(f'news sleep time: {sleep_time}')
+        await asyncio.sleep(sleep_time)
+
 
 async def pol_task():
     while True:
@@ -27,7 +31,8 @@ def create_app() -> FastAPI:
 
     @app.on_event("startup")
     def startup_function():
-        asyncio.create_task(pol_task())
+        # asyncio.create_task(pol_task())
+        asyncio.create_task(news_task())
 
 
     # @app.on_event("startup")

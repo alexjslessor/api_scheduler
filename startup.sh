@@ -1,7 +1,11 @@
 #!/bin/bash
 
 source ./env && test_env
+
 uvicorn main:app --reload --port $PORT
+
+# gql
+# uvicorn init:app --reload --port $PORT
 
 
 run_tests() {
