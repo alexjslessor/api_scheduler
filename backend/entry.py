@@ -10,7 +10,7 @@ settings = get_settings()
 async def news_task():
     while True:
         await get_rss()
-        sleep_time = 10
+        sleep_time = 130
         logger.info(f'news sleep time: {sleep_time}')
         await asyncio.sleep(sleep_time)
 
@@ -31,7 +31,7 @@ def create_app() -> FastAPI:
 
     @app.on_event("startup")
     def startup_function():
-        # asyncio.create_task(pol_task())
+        asyncio.create_task(pol_task())
         asyncio.create_task(news_task())
 
 
