@@ -9,7 +9,7 @@ def terra_deploy():
     cmd = f'{set_env} && cd tf && ./deploy'
     result = run(cmd, hide=False, warn=True)
     if result.ok:
-        print(result.stdout)
+        print(result.shell)
 
 @app.command()
 def startup():
