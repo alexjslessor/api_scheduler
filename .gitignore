@@ -3,13 +3,9 @@ __pycache__
 .env
 celerybeat-schedule
 celerybeat.pid
+gql_test.py
+
 .terraform
 app.py
-init.py
-
-
-
-
-
-
-
+*.png
+*.log

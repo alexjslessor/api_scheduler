@@ -10,15 +10,14 @@ settings = get_settings()
 async def news_task():
     while True:
         await get_rss()
-        sleep_time = 1130
+        sleep_time = 5
         logger.info(f'news sleep time: {sleep_time}')
         await asyncio.sleep(sleep_time)
-
 
 async def pol_task():
     while True:
         await get_pol()
-        sleep_time = 69
+        sleep_time = 85
         logger.info(f'sleep time: {sleep_time}')
         await asyncio.sleep(sleep_time)
 
@@ -32,14 +31,7 @@ def create_app() -> FastAPI:
     @app.on_event("startup")
     def startup_function():
         asyncio.create_task(pol_task())
-        asyncio.create_task(news_task())
-
-
-    # @app.on_event("startup")
-    # def startup_function():
-    #     app.state.shared_object = MySharedObject()
-    #     asyncio.create_task(timed_checker(app.state.shared_object))
-
+        # asyncio.create_task(news_task())
 
     return app
 

@@ -9,12 +9,11 @@ async def get_pol():
         )
 
     idx = await mon_db.create_unique_idx(db['4chan'], 'no')
-    result = await db['4chan'].bulk_write(update)
-
-    logger.info(f"nModified: {result.bulk_api_result['nModified']}")
-    logger.info(f"nUpserted: {result.bulk_api_result['nUpserted']}")
-    logger.info(f"nInserted: {result.bulk_api_result['nInserted']}")
-    logger.info(f"nMatched: {result.bulk_api_result['nMatched']}")
+    result = await db['4chan'].bulk_write(update)    
+    logger.info(f"4chan nModified: {result.bulk_api_result['nModified']}")
+    logger.info(f"4chan nUpserted: {result.bulk_api_result['nUpserted']}")
+    logger.info(f"4chan nInserted: {result.bulk_api_result['nInserted']}")
+    logger.info(f"4chan nMatched: {result.bulk_api_result['nMatched']}")
 
 
 

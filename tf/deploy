@@ -16,12 +16,10 @@ deploy_app() {
         # -var "do_token=${DO_PAT}" \
         # -var "mongo_uri=${MONGO_URI}"
 }
-deploy_app
+# deploy_app
 
 # terraform plan -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}"
 # terraform apply -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}"
-
-
 # terraform apply -var "do_token=${DO_PAT}" -var "domain_name=${DO_DOMAIN_NAME}" -var "private_key=${DO_PRIVATE_KEY}"
 
 # terraform show | grep "ipv4"

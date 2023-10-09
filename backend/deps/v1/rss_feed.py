@@ -18,9 +18,10 @@ async def get_rss():
     # delete = await db.drop_collection('rss')
 
     result = await db['rss'].bulk_write(update)
-    logger.info(f"nModified: {result.bulk_api_result['nModified']}")
-    logger.info(f"nUpserted: {result.bulk_api_result['nUpserted']}")
-    logger.info(f"nInserted: {result.bulk_api_result['nInserted']}")
-    logger.info(f"nMatched: {result.bulk_api_result['nMatched']}")
+
+    logger.info(f"rss nModified: {result.bulk_api_result['nModified']}")
+    logger.info(f"rss nUpserted: {result.bulk_api_result['nUpserted']}")
+    logger.info(f"rss nInserted: {result.bulk_api_result['nInserted']}")
+    logger.info(f"rss nMatched: {result.bulk_api_result['nMatched']}")
 
 

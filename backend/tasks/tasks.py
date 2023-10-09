@@ -1,5 +1,5 @@
 from celery import shared_task
-from osint_tools.api import get_catalog, Board
+from osint_tools.four_chan import get_catalog, Board
 from pprint import pprint
 import time
 '''
