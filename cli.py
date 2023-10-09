@@ -16,6 +16,19 @@ def build_api():
         print(result.stdout)
 
 @app.command()
+def wipe_env():
+    cmd = f'''
+    {set_env}
+    sver
+    pip freeze | cut -d "@" -f1 | xargs pip uninstall -y
+    wipeenv
+    '''
+    result = run(cmd, hide=False, warn=True)
+    if result.ok:
+        print(result.stdout)
+
+
+@app.command()
 def terra_deploy():
     cmd = f'{set_env} && cd tf && ./deploy'
     result = run(cmd, hide=False, warn=True)
