@@ -1,8 +1,6 @@
 from functools import lru_cache
 from pydantic import BaseSettings
 from os import environ
-# from typing import List
-# import os.path
 import ssl
 
 class _BaseSettings(BaseSettings):

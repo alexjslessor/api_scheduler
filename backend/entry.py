@@ -1,8 +1,9 @@
 from fastapi import FastAPI
-from osint_tools.logs import logger
 import asyncio
+
+from .init import logger
 from .deps import get_pol, get_rss
-from .celery_utils import create_celery
+# from .celery_utils import create_celery
 from .settings import get_settings
 
 settings = get_settings()
@@ -25,7 +26,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.TITLE
     )
-    app.celery_app = create_celery()
+    # app.celery_app = create_celery()
     # app.include_router(read_routes.router)
 
     @app.on_event("startup")
