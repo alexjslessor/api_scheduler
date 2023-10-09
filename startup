@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source ./env && dev_env_sched
+uvicorn main:app --reload --port 5000
+
+
