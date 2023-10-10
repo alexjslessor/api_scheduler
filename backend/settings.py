@@ -16,37 +16,32 @@ class _BaseSettings(BaseSettings):
     # CORS_ALLOW_HEADERS: List[str] = ['*']
     # CORS_ORIGINS: List[str] = ['*']
     # PORT: int = environ.get('PORT')
-    APP_NAME: str = environ.get("APP_NAME")
-    APP_VERSION: str = environ.get("APP_VERSION")
-    ENV_NAME: str = environ.get("ENV_NAME")
+    API_LOGGER = environ.get('API_LOGGER', __name__)
+    TASK_LOGGER = environ.get('TASK_LOGGER', __name__)
 
-    INPUT_BUCKET: str = environ.get('INPUT_BUCKET')
-    BUCKET_NAME: str = f'{APP_NAME}-{APP_VERSION}-{ENV_NAME}-{INPUT_BUCKET}'
-
-    AWS_REGION: str = environ.get('AWS_REGION')
-    MONGO_URI: str = environ.get('MONGO_URI')
-    MONGO_DB_NAME: str = environ.get('MONGO_DB_NAME')
-
+    MONGO_URI: str = environ['MONGO_URI']
+    MONGO_DB_NAME: str = environ['MONGO_DB_NAME']
 
     # https://docs.celeryq.dev/en/stable/userguide/configuration.html#id11
     BROKER_USE_SSL = {
         'cert_reqs': ssl.CERT_NONE
     }
-    CELERY_BROKER_URL: str = environ.get("CELERY_BROKER_URL")
-    RESULT_BACKEND: str = environ.get("RESULT_BACKEND")
-    WS_MESSAGE_QUEUE: str = environ.get("WS_MESSAGE_QUEUE")
-
+    # for celery namespace vars must be prefixed with CELERY_
+    # CELERY_BROKER_URL: str = environ["CELERY_BROKER_URL"]
+    # CELERY_RESULT_BACKEND: str = environ["CELERY_RESULT_BACKEND"]
+    # WS_MESSAGE_QUEUE: str = environ["WS_MESSAGE_QUEUE"]
     # RESULT_BACKEND: str = 'rediss://default:AVNS_FI4Hb3oB0jG36lKv6Pv@db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com:25061?ssl_cert_reqs=none'
     # WS_MESSAGE_QUEUE: str = 'rediss://default:AVNS_FI4Hb3oB0jG36lKv6Pv@db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com:25061?ssl_cert_reqs=none'
     # CELERY_BROKER_URL: str = 'rediss://default:AVNS_FI4Hb3oB0jG36lKv6Pv@db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com:25061?ssl_cert_reqs=none'
+    # https://docs.celeryq.dev/en/stable/userguide/periodic-tasks.html#available-fields
     CELERY_BEAT_SCHEDULE: dict = {
         "sanity-task": {
             "task": "tasks.sanity_task",
-            "schedule": 80.0,
+            "schedule": 5,
         },
         "get-pol": {
             "task": "tasks.get_pol",
-            "schedule": 40.0,
+            "schedule": 61,
         }
     }
 
