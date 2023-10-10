@@ -1,48 +1,7 @@
 osint-tools
-# aiofiles==0.8.0
-# boto3==1.20.18
-# httpx==0.13.0
-# httpx==0.23.3
 httpx==0.25.0
-
-# fastapi==0.74.1
-# gunicorn==20.1.0
-
 uvicorn==0.19.0
-# uvicorn==0.15.0
-# uvicorn[standard]==0.17.5
-# python-multipart==0.0.5
-# pydantic[email,dotenv]==1.10.13
-# pydantic[email,dotenv]
+# for periodic tasks
 # celery==5.1.2
 # redis==3.5.3
 # flower==1.0.0
-# requests==2.22.0
-
-# motor
-
-# amazon-textract-caller==0.0.18
-# amazon-textract-prettyprinter==0.0.10
-# amazon-textract-response-parser==0.1.26
-# amazon-textract-overlayer==0.0.7
-# aenum==3.1.11
-# matplotlib
-# pandas
-# imutils
-# scikit-image
-# scipy
-# pytesseract==0.3.8
-# Pillow==8.4.0
-# Pillow==9.0.1
-# pyxpdf==0.2.3
-# pyxpdf-data==1.1.0
-# PyMuPDF==1.19.4
-# Wand==0.6.7
-# fhir.resources==6.1.0
-# pydantic-fhir==0.0.1a17
-# borb==2.0.15
-# opencv-python==4.5.5.62
-# opencv-python==4.5.4.60
-# motor==2.5.1
-# sendgrid==6.9.7
-# magnum==0.15.1
