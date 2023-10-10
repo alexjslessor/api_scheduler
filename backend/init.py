@@ -21,9 +21,8 @@ def setup_logger(which_logger: Optional[str] = None):
     log.setLevel(lib_level)
     return log
 
-WHICH_LOGGER = environ.get('WHICH_LOGGER', __name__)
-logger = setup_logger(WHICH_LOGGER)
 settings = get_settings()
+logger = setup_logger(settings.API_LOGGER)
 mon_db = MongoCrud(settings.MONGO_URI, settings.MONGO_DB_NAME)
 db = mon_db.get_mongo_db()
 
