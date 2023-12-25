@@ -30,9 +30,13 @@ class _BaseSettings(BaseSettings):
     # CELERY_BROKER_URL: str = environ["CELERY_BROKER_URL"]
     # CELERY_RESULT_BACKEND: str = environ["CELERY_RESULT_BACKEND"]
     # WS_MESSAGE_QUEUE: str = environ["WS_MESSAGE_QUEUE"]
-    # RESULT_BACKEND: str = 'rediss://default:AVNS_FI4Hb3oB0jG36lKv6Pv@db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com:25061?ssl_cert_reqs=none'
-    # WS_MESSAGE_QUEUE: str = 'rediss://default:AVNS_FI4Hb3oB0jG36lKv6Pv@db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com:25061?ssl_cert_reqs=none'
-    # CELERY_BROKER_URL: str = 'rediss://default:AVNS_FI4Hb3oB0jG36lKv6Pv@db-redis-tor1-70141-do-user-4185874-0.b.db.ondigitalocean.com:25061?ssl_cert_reqs=none'
+    CELERY_CELERYD_LOG_FORMAT: str = '[%(asctime)s: %(levelname)s/%(processName)s] %(message)s'
+    CELERY_CELERYD_TASK_LOG_FORMAT: str = '[%(asctime)s: %(levelname)s/%(processName)s][%(task_name)s(%(task_id)s)] %(message)s'
+    # CELERY_CELERYD_LOG_FILE: str = environ['LOG_FILE_PATH']  # Update with your log file path
+    # for prod
+    # CELERYD_LOG_FILE = '[stderr]'
+
+    CELERY_CELERYD_LOG_LEVEL: str = 'INFO'  # Log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     # https://docs.celeryq.dev/en/stable/userguide/periodic-tasks.html#available-fields
     CELERY_BEAT_SCHEDULE: dict = {
         "sanity-task": {
@@ -41,7 +45,11 @@ class _BaseSettings(BaseSettings):
         },
         "get-pol": {
             "task": "tasks.get_pol",
-            "schedule": 61,
+            "schedule": 10,
+        },
+        "get-rss-celery": {
+            "task": "tasks.get_rss_celery",
+            "schedule": 45,
         }
     }
 
