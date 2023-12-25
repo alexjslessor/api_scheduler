@@ -9,4 +9,6 @@ gql_test.py
 app.py
 *.png
 *.log
+*.pdf
 z_notes
+test

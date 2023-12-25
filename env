@@ -10,7 +10,6 @@ set_env_sched() {
 
 dev_env_sched() {
   set_env_sched `pwd`/.env/.base
-#   set_env .test
   echo "${MONGO_DB_NAME}"
 }
 

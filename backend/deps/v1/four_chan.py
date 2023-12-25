@@ -1,11 +1,16 @@
 from ..base_deps import *
+from osint_tools.four_chan import get_catalog, Board
 
 async def get_pol():
     data = get_catalog(Board.pol)
     update = []
     for catalog_model in data:
-        update.append(ReplaceOne(
-            {'no': catalog_model.no}, catalog_model.dict(), upsert=True)
+        update.append(
+            ReplaceOne(
+                {'no': catalog_model.no}, 
+                catalog_model.dict(), 
+                upsert=True
+            )
         )
 
     idx = await mon_db.create_unique_idx(db['4chan'], 'no')
@@ -14,7 +19,7 @@ async def get_pol():
     logger.info(f"4chan nUpserted: {result.bulk_api_result['nUpserted']}")
     logger.info(f"4chan nInserted: {result.bulk_api_result['nInserted']}")
     logger.info(f"4chan nMatched: {result.bulk_api_result['nMatched']}")
-
+    return True
 
 
 

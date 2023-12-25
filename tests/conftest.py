@@ -6,12 +6,16 @@ import pytest_asyncio
 import pytest
 import asyncio
 
-from backend.entry import create_app
+from osint_tools.db import MongoCrud
+
+# from backend.entry import create_app
 from backend.deps import *
 from backend.settings import get_settings
-from backend.init import mon_db, db
+from backend.init import mon_db
 
 settings = get_settings()
+mon_db = MongoCrud(settings.MONGO_URI, settings.MONGO_DB_NAME)
+db = mon_db.get_mongo_db()
 
 
 

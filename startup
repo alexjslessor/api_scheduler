@@ -4,4 +4,6 @@ source ./env && dev_env_sched
 
 # ensure redis, celery and flower are installed
 uvicorn main:app --reload --port 5000 &
-celery -A main.celery beat -l info
+celery -A main.celery beat --loglevel=debug
+# celery -A main.celery beat
+# celery -A main.celery beat -l info
