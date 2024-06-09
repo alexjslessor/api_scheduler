@@ -11,7 +11,7 @@ from osint_tools.db import MongoCrud
 # from backend.entry import create_app
 from backend.deps import *
 from backend.settings import get_settings
-from backend.init import mon_db
+from backend.init import logger
 
 settings = get_settings()
 mon_db = MongoCrud(settings.MONGO_URI, settings.MONGO_DB_NAME)
