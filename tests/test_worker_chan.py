@@ -1,19 +1,12 @@
 from .conftest import *
-from pydantic import BaseModel
-from osint_tools.db import MongoCrud
 from osint_tools.four_chan import get_catalog
-
-mon_db = MongoCrud(settings.MONGO_URI, settings.MONGO_DB_NAME)
-db = mon_db.get_mongo_db()
 
 @pytest.mark.asyncio
 class TestChanWorker:
     async def test_get_chan(self):
         data = get_catalog('pol')
-        # pprint(data)
+        logger.info(data[:3])
         assert data, 'result list empty'
-
-
 
         # loop = aio.get_or_create_eventloop()
         # loop.run_until_complete(
