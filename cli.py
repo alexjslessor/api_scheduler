@@ -1,7 +1,7 @@
 import typer
 from invoke import run
 
-set_env = 'source ./env && dev_env_sched'
+set_env = 'source scripts/env && dev_env_sched'
 app = typer.Typer()
 
 @app.command()
