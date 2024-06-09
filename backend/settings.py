@@ -53,28 +53,7 @@ class _BaseSettings(BaseSettings):
         }
     }
 
-# class DevSettings(_BaseSettings):
-    # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-    # DATA_DIR = os.path.join(ROOT_DIR, 'data')
-
-# class ProdSettings(_BaseSettings):
-#     pass
-
-# class TestSettings(_BaseSettings):
-#     pass
-
 @lru_cache()
-def get_settings() -> BaseSettings:
+def get_settings() -> _BaseSettings:
     return _BaseSettings()
 
-# @lru_cache()
-# def get_settings() -> BaseSettings:
-#     config_dict = {
-#         'development': DevSettings,
-#         # 'production': ProdSettings,
-#         # 'testing': TestSettings
-#     }
-#     config_name: str = environ.get('ENV_NAME', 'development')
-#     assert config_name != None, f'Set ENV_NAME variable: {list(config_dict.keys())}'
-#     config_cls = config_dict[config_name]
-#     return config_cls()

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set_env_sched() {
+  local env_file_path=$1
+  grep -v '^#' $env_file_path
+  export $(grep -v '^#' $env_file_path | xargs)
+  echo "<---ENV: $env_file_path --->"
+}
+dev_env_sched() {
+  set_env_sched `pwd`/.env/.base
+  echo "${MONGO_DB_NAME}"
+}
+build_local_install_pkg() {
+    rm -rf $1/dist 
+    cd $1 
+    poetry build 
+    pip install $1/dist/*.whl --force-reinstall
+}
